@@ -1,380 +1,665 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sayit - Secure Chat</title>
-    <meta name="description" content="Create private chat rooms that automatically delete after 24 hours. No registration required.">
-    <meta name="theme-color" content="#18181b">
-    <base href="https://rflyhigh.github.io/sayit/">
+    <title>Shekhar's Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #18181b;
-            --bg-secondary: #27272a;
-            --bg-hover: #2d2d30;
-            --text-primary: #e4e4e7;
-            --text-secondary: #a1a1aa;
-            --text-muted: #71717a;
-            --accent-primary: #7C3AED;
-            --accent-hover: #6D28D9;
-            --error: #ef4444;
-            --success: #10B981;
-            --border-radius: 8px;
-            --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+            --bg-color: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --text-color: #ffffff;
+            --text-secondary: #9ca3af;
+            --accent-color: #64ffda;
+            --hover-color: #76efdc;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #ffffff;
+            --card-bg: #f3f4f6;
+            --text-color: #1a1a1a;
+            --text-secondary: #4b5563;
+            --accent-color: #0ea5e9;
+            --hover-color: #0284c7;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
+            font-family: 'Space Mono', monospace;
+            transition: all 0.2s ease;
         }
 
         body {
-            font-family: system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            min-height: 100vh;
-            min-height: -webkit-fill-available;
-        }
-
-        html {
-            height: -webkit-fill-available;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.5;
+            padding: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem;
-            height: 100vh;
             display: flex;
             flex-direction: column;
+            gap: 1.5rem;
         }
 
-        .hero {
-            flex: 1;
+        .section {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .header {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem 1rem;
-            text-align: center;
-            background: linear-gradient(to bottom, rgba(124, 58, 237, 0.1), transparent);
-            gap: 2rem;
-        }
-
-        .hero h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            background: linear-gradient(to right, var(--accent-primary), #9F7AEA);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1.2;
-        }
-
-        .hero p {
-            font-size: clamp(1rem, 3vw, 1.25rem);
-            max-width: 600px;
-            margin: 0 auto;
-            color: var(--text-secondary);
-        }
-
-        .button-group {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            width: 100%;
-            max-width: 400px;
-            padding: 0 1rem;
-        }
-
-        .button {
-            background: var(--accent-primary);
-            color: var(--text-primary);
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: var(--border-radius);
-            font-size: 1.125rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            width: 100%;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             gap: 0.5rem;
         }
 
-        .button:hover {
-            background: var(--accent-hover);
-            transform: translateY(-1px);
+        h1 {
+            font-size: 2rem;
+            color: var(--accent-color);
         }
 
-        .modal {
-            display: none;
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title::before {
+            content: "";
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: var(--accent-color);
+        }
+
+        .current-role {
+            margin-bottom: 1rem;
+        }
+
+        .role-title {
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .location {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .skill-card {
+            background: var(--bg-color);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--accent-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(100, 255, 218, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            transition: transform 0.6s;
+            pointer-events: none;
+        }
+
+        .skill-card:hover::before {
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+
+        .project-item {
+            background: var(--bg-color);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            cursor: pointer;
+            color: var(--text-color);
+            border: 1px solid transparent;
+            position: relative;
+        }
+
+        .project-header:hover {
+            border-color: var(--accent-color);
+        }
+
+        .project-header::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .project-header:hover::before {
+            width: 100%;
+        }
+
+        .project-content {
+            height: 0;
+            overflow: hidden;
+            transition: height 0.3s ease-out;
+            padding: 0 1rem;
+        }
+
+        .project-content.active {
+            height: auto;
+            padding: 1rem;
+            border-top: 1px solid var(--accent-color);
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .tech-tag {
+            background: var(--card-bg);
+            color: var(--accent-color);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            border: 1px solid var(--accent-color);
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .contact-link i {
+            font-size: 1.1rem;
+        }
+
+        .contact-link:hover {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            transform: translateY(-2px);
+        }
+
+        .cursor-glow {
+            width: 20px;
+            height: 20px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            mix-blend-mode: difference;
+            transition: transform 0.2s;
+            z-index: 9999;
+            opacity: 0.5;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--bg-color);
+            z-index: 1000;
+        }
+
+        .progress-bar::after {
+            content: '';
+            display: block;
+            height: 100%;
+            width: 0;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .floating-nav {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: var(--accent-color);
+            transform: scale(1.5);
+        }
+
+        .nav-dot:hover {
+            transform: scale(1.5);
+        }
+
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .arrow.active {
+            transform: rotate(90deg);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--accent-color);
+            color: var(--bg-color);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--accent-color);
+            color: var(--bg-color);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .particles {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(4px);
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            padding: 1rem;
+            pointer-events: none;
+            z-index: -1;
         }
 
-        .modal-content {
-            background: var(--bg-secondary);
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            width: 100%;
-            max-width: 400px;
-            animation: modalSlide 0.3s ease-out;
-            position: relative;
-        }
-
-        .modal-content h2 {
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-            color: var(--text-primary);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 0.875rem;
-            background: var(--bg-primary);
-            border: 2px solid var(--text-muted);
-            border-radius: var(--border-radius);
-            color: var(--text-primary);
-            font-size: 1rem;
-            transition: border-color 0.2s;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-        }
-
-        .notification {
-            position: fixed;
-            bottom: calc(2rem + var(--safe-area-inset-bottom));
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 1rem 1.5rem;
-            border-radius: var(--border-radius);
-            color: var(--text-primary);
-            display: none;
-            animation: slideUp 0.3s ease-out;
-            z-index: 2000;
-            max-width: calc(100% - 2rem);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .close-modal {
+        .particle {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            padding: 0.5rem;
+            background: var(--accent-color);
             border-radius: 50%;
-            transition: all 0.2s;
+            opacity: 0.3;
+            pointer-events: none;
         }
 
-        .close-modal:hover {
-            color: var(--text-primary);
-            background: var(--bg-hover);
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
         }
 
-        @keyframes modalSlide {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
 
-        @keyframes slideUp {
-            from { transform: translate(-50%, 100%); }
-            to { transform: translate(-50%, 0); }
+        .loading-animation {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--text-secondary);
+            border-top-color: var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
 
-        @media (max-width: 640px) {
-            .container {
-                padding: 0.5rem;
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 600px) {
+            .skills-grid {
+                grid-template-columns: 1fr 1fr;
             }
-            .hero {
-                padding: 1rem 0.5rem;
+            
+            body {
+                padding: 1rem;
             }
-            .button-group {
-                flex-direction: column;
-                padding: 0 0.5rem;
-            }
-            .modal-content {
-                padding: 1.5rem;
+
+            .floating-nav {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
+    <div class="loading-screen">
+        <div class="loading-animation"></div>
+    </div>
+
+    <div class="cursor-glow"></div>
+    <div class="progress-bar"></div>
+    <div class="floating-nav">
+        <div class="nav-dot" data-section="header"></div>
+        <div class="nav-dot" data-section="current"></div>
+        <div class="nav-dot" data-section="skills"></div>
+        <div class="nav-dot" data-section="projects"></div>
+    </div>
+    <div class="particles"></div>
+
     <div class="container">
-        <section class="hero">
-            <h1>Sayit</h1>
-            <p>Create private chat rooms that automatically delete after 24 hours. No registration required.</p>
-            <div class="button-group">
-                <button class="button" onclick="showModal('createModal')">Create Room</button>
-                <button class="button" onclick="showModal('joinModal')">Join Room</button>
+        <header class="section" id="header">
+            <h1>Hi, I am Shekhar.</h1>
+            <div class="subtitle">A student and tech enthusiast based in Pune, India.</div>
+            <div class="status">Available for Projects</div>
+            <div class="contact-links">
+                <a href="mailto:shekhar9330@gmail.com" class="contact-link">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+                <a href="https://github.com/flyhighr" class="contact-link" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="#" class="contact-link">
+                    <i class="fab fa-discord"></i> rflyhigh
+                </a>
+            </div>
+        </header>
+
+        <section class="section" id="current">
+            <div class="section-title">Currently</div>
+            <div class="current-role">
+                <div class="role-title">Student Developer</div>
+                <div class="location">Pune, India</div>
+                <div class="date">2024 - Present</div>
+            </div>
+            <div class="about-text">
+                Passionate about Python development and machine learning. Currently focused on developing ML models 
+                and expanding my knowledge in data science. I love experimenting with new technologies and building 
+                practical solutions.
+            </div>
+        </section>
+
+        <section class="section" id="education">
+            <div class="section-title">Education</div>
+            <div class="current-role">
+                <div class="role-title">Diploma in AI and ML</div>
+                <div class="location">Ajeenkya DY Patil School of Engineering, Lohegaon</div>
+                <div class="date">Expected completion in 1.5 years</div>
+            </div>
+        </section>
+
+        <section class="section" id="skills">
+            <div class="section-title">Skills & Technologies</div>
+            <div class="skills-grid">
+                <div class="skill-card">Python</div>
+                <div class="skill-card">Machine Learning</div>
+                <div class="skill-card">Data Science</div>
+                <div class="skill-card">Neural Networks</div>
+                <div class="skill-card">TensorFlow</div>
+                <div class="skill-card">scikit-learn</div>
+            </div>
+        </section>
+
+        <section class="section" id="projects">
+            <div class="section-title">Recent Work</div>
+            <div class="projects">
+                <div class="project-item">
+                    <div class="project-header">
+                        <span>ML Model Development</span>
+                        <span class="arrow">→</span>
+                    </div>
+                    <div class="project-content">
+                        <p>A comprehensive machine learning model for predictive analytics.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">TensorFlow</span>
+                            <span class="tech-tag">scikit-learn</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-header">
+                        <span>Data Analysis Projects</span>
+                        <span class="arrow">→</span>
+                    </div>
+                    <div class="project-content">
+                        <p>Series of data analysis projects focusing on real-world problems.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Pandas</span>
+                            <span class="tech-tag">Matplotlib</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-header">
+                        <span>Python Automation Tools</span>
+                        <span class="arrow">→</span>
+                    </div>
+                    <div class="project-content">
+                        <p>Collection of automation scripts for daily tasks.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Selenium</span>
+                            <span class="tech-tag">BeautifulSoup</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
 
-    <!-- Create Room Modal -->
-    <div id="createModal" class="modal">
-        <div class="modal-content">
-            <button class="close-modal" onclick="hideModal('createModal')">✕</button>
-            <h2>Create New Room</h2>
-            <div class="form-group">
-                <label for="createName">Display Name</label>
-                <input type="text" id="createName" placeholder="Enter your display name" maxlength="30">
-            </div>
-            <button class="button" onclick="createRoom()">Create Room</button>
-        </div>
-    </div>
-
-    <!-- Join Room Modal -->
-    <div id="joinModal" class="modal">
-        <div class="modal-content">
-            <button class="close-modal" onclick="hideModal('joinModal')">✕</button>
-            <h2>Join Room</h2>
-            <div class="form-group">
-                <label for="joinCode">Room Code</label>
-                <input type="text" id="joinCode" placeholder="Enter room code" maxlength="6">
-            </div>
-            <div class="form-group">
-                <label for="joinName">Display Name</label>
-                <input type="text" id="joinName" placeholder="Enter your display name" maxlength="30">
-            </div>
-            <button class="button" onclick="joinRoom()">Join Room</button>
-        </div>
-    </div>
-
-    <div id="notification" class="notification"></div>
+    <button class="theme-toggle" aria-label="Toggle theme">🌓</button>
 
     <script>
-        const API_URL = 'https://chat-8ynk.onrender.com'; 
+        // Theme toggle
+        const themeToggle = document.querySelector('.theme-toggle');
+        const html = document.documentElement;
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
 
-        function showModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.style.display = 'flex';
-            modal.querySelector('input').focus();
-            document.body.style.overflow = 'hidden';
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            html.setAttribute('data-theme', savedTheme);
         }
 
-        function hideModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-            document.body.style.overflow = '';
+        // Fixed project dropdown functionality
+        document.querySelectorAll('.project-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const arrow = header.querySelector('.arrow');
+                const isActive = content.classList.contains('active');
+                
+                // Close all other projects
+                document.querySelectorAll('.project-content').forEach(item => {
+                    item.classList.remove('active');
+                    item.style.height = '0px';
+                });
+                
+                document.querySelectorAll('.arrow').forEach(arr => {
+                    arr.classList.remove('active');
+                });
+
+                // Toggle current project
+                if (!isActive) {
+                    content.classList.add('active');
+                    content.style.height = content.scrollHeight + 'px';
+                    arrow.classList.add('active');
+                }
+            });
+        });
+
+        // Cursor glow effect
+        const cursor = document.querySelector('.cursor-glow');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 10 + 'px';
+            cursor.style.top = e.clientY - 10 + 'px';
+        });
+
+        // Scroll progress
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.querySelector('.progress-bar').style.width = scrolled + '%';
+        });
+
+        // Section visibility
+        const sections = document.querySelectorAll('.section');
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    updateNavDots(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Navigation dots
+        function updateNavDots(visibleSection) {
+            const dots = document.querySelectorAll('.nav-dot');
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.dataset.section === visibleSection.id) {
+                    dot.classList.add('active');
+                }
+            });
         }
 
-        function showNotification(message, type = 'success') {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.style.display = 'block';
-            notification.style.backgroundColor = type === 'success' ? 'var(--success)' : 'var(--error)';
-            
+        // Particle effect
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.width = Math.random() * 5 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.top = Math.random() * 100 + 'vh';
+            document.querySelector('.particles').appendChild(particle);
+
             setTimeout(() => {
-                notification.style.display = 'none';
+                particle.remove();
             }, 3000);
         }
 
-        function generateName() {
-            const adjectives = ['Swift', 'Brave', 'Clever', 'Noble', 'Wise', 'Dynamic', 'Stellar', 'Vibrant'];
-            const nouns = ['Phoenix', 'Dragon', 'Wolf', 'Eagle', 'Lion', 'Tiger', 'Falcon', 'Panther'];
-            return `${adjectives[Math.floor(Math.random() * adjectives.length)]}${nouns[Math.floor(Math.random() * nouns.length)]}`;
-        }
+        setInterval(createParticle, 200);
 
-        async function createRoom() {
-            const nameInput = document.getElementById('createName');
-            const name = nameInput.value.trim() || generateName();
-            
-            try {
-                const response = await fetch(`${API_URL}/api/rooms/create`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
+        // Loading screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.loading-screen').classList.add('hidden');
+            }, 1000);
+        });
 
-                if (!response.ok) throw new Error('Failed to create room');
-                
-                const data = await response.json();
-                localStorage.setItem('chatName', name);
-                localStorage.setItem('roomCode', data.code);
-                
-                showNotification('Room created successfully!');
-                setTimeout(() => {
-                    window.location.href = `./chat.html?room=${data.code}`; // Updated path
-                }, 1000);
-            } catch (error) {
-                showNotification('Failed to create room. Please try again.', 'error');
-            }
-        }
-
-
-        async function joinRoom() {
-            const codeInput = document.getElementById('joinCode');
-            const nameInput = document.getElementById('joinName');
-            const code = codeInput.value.trim().toUpperCase();
-            const name = nameInput.value.trim() || generateName();
-            
-            if (!code) {
-                showNotification('Please enter a room code', 'error');
-                codeInput.focus();
-                return;
-            }
-
-            try {
-                const response = await fetch(`${API_URL}/api/rooms/${code}`);
-                if (!response.ok) throw new Error('Room not found');
-                
-                localStorage.setItem('chatName', name);
-                localStorage.setItem('roomCode', code);
-                window.location.href = `./chat.html?room=${code}`; // Updated path
-            } catch (error) {
-                showNotification('Failed to join room. Please check the room code.', 'error');
-            }
-        }
-
-        // Close modals when clicking outside
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                hideModal(event.target.id);
-            }
-        }
-
-        // Handle Enter key in inputs
-        document.querySelectorAll('input').forEach(input => {
-            input.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    const modalId = this.closest('.modal').id;
-                    if (modalId === 'createModal') {
-                        createRoom();
-                    } else if (modalId === 'joinModal') {
-                        joinRoom();
-                    }
-                }
+        // Smooth scrolling for nav dots
+        document.querySelectorAll('.nav-dot').forEach(dot => {
+            dot.addEventListener('click', () => {
+                const targetSection = document.getElementById(dot.dataset.section);
+                targetSection.scrollIntoView({ behavior: 'smooth' });
             });
         });
     </script>
