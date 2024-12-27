@@ -543,7 +543,6 @@
     <button class="theme-toggle" aria-label="Toggle theme">🌓</button>
 
     <script>
-        // Theme toggle
         const themeToggle = document.querySelector('.theme-toggle');
         const html = document.documentElement;
         
@@ -554,20 +553,18 @@
             localStorage.setItem('theme', newTheme);
         });
 
-        // Load saved theme
+        
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             html.setAttribute('data-theme', savedTheme);
         }
-
-        // Fixed project dropdown functionality
         document.querySelectorAll('.project-header').forEach(header => {
             header.addEventListener('click', () => {
                 const content = header.nextElementSibling;
                 const arrow = header.querySelector('.arrow');
                 const isActive = content.classList.contains('active');
                 
-                // Close all other projects
+                
                 document.querySelectorAll('.project-content').forEach(item => {
                     item.classList.remove('active');
                     item.style.height = '0px';
@@ -577,7 +574,7 @@
                     arr.classList.remove('active');
                 });
 
-                // Toggle current project
+            
                 if (!isActive) {
                     content.classList.add('active');
                     content.style.height = content.scrollHeight + 'px';
@@ -586,14 +583,12 @@
             });
         });
 
-        // Cursor glow effect
         const cursor = document.querySelector('.cursor-glow');
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX - 10 + 'px';
             cursor.style.top = e.clientY - 10 + 'px';
         });
 
-        // Scroll progress
         window.addEventListener('scroll', () => {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -601,7 +596,6 @@
             document.querySelector('.progress-bar').style.width = scrolled + '%';
         });
 
-        // Section visibility
         const sections = document.querySelectorAll('.section');
         const observerOptions = {
             threshold: 0.1
@@ -620,7 +614,6 @@
             observer.observe(section);
         });
 
-        // Navigation dots
         function updateNavDots(visibleSection) {
             const dots = document.querySelectorAll('.nav-dot');
             dots.forEach(dot => {
@@ -631,7 +624,6 @@
             });
         }
 
-        // Particle effect
         function createParticle() {
             const particle = document.createElement('div');
             particle.className = 'particle';
@@ -648,14 +640,11 @@
 
         setInterval(createParticle, 200);
 
-        // Loading screen
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.querySelector('.loading-screen').classList.add('hidden');
             }, 1000);
         });
-
-        // Smooth scrolling for nav dots
         document.querySelectorAll('.nav-dot').forEach(dot => {
             dot.addEventListener('click', () => {
                 const targetSection = document.getElementById(dot.dataset.section);
