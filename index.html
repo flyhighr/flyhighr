@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shekhar - Portfolio</title>
+    <title>Shekhar - Portfolio?</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
@@ -99,6 +99,131 @@
             margin: 20px 0;
         }
 
+        @media (max-width: 640px) {
+            .container {
+                padding: 20px 16px;
+            }
+            
+            .contact-links {
+                flex-direction: column;
+            }
+            
+            .contact-link {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="section" id="header">
+            <h1>Hi, I am Shekhar.</h1>
+            <div class="subtitle">A student and developer based in Pune, India.</div>
+            <div class="status">Looking for cool projects to work on</div>
+            <div class="contact-links">
+                <a href="mailto:shekhar9330@gmail.com" class="contact-link">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+                <a href="https://github.com/flyhighr" class="contact-link" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="#" class="contact-link">
+                    <i class="fab fa-discord"></i> rflyhigh
+                </a>
+            </div>
+        </header>
+
+        <section class="section" id="current">
+            <div class="section-title">Currently</div>
+            <div class="current-role">
+                <div class="role-title">Student Developer - Freelance</div>
+                <div class="date">2024 - Present</div>
+                <div class="location">Nextvision</div>
+                <div class="location">Pune, India</div>
+            </div>
+            <div class="about-text">
+                Working on a side project using the DeepSeek-V3 to build a agent that actually understands context 
+                (trying my best to make it work!). When I'm not debugging ML models, I'm usually playing around 
+                with Python and building small tools that make life easier. Trying to figure out how to make machines think better.
+            </div>
+        </section>
+                <section class="section" id="education">
+            <div class="section-title">Education</div>
+            <div class="current-role">
+                <div class="role-title">Diploma in AI and ML</div>
+                <div class="location">Ajeenkya DY Patil School of Engineering, Lohegaon</div>
+                <div class="date">2023 - Present</div>
+                <div class="about-text">
+                    Spending my time here building cool stuff with cool people.
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="skills">
+            <div class="section-title">things i know</div>
+            <div class="skills-grid">
+                <div class="skill-card">NumPy</div>
+                <div class="skill-card">PyTorch</div>
+                <div class="skill-card">Spacy</div>
+                <div class="skill-card">OpenCV</div>
+                <div class="skill-card">PIL</div>
+                <div class="skill-card">FastAPI</div>
+            </div>
+        </section>
+
+        <section class="section" id="projects">
+            <div class="section-title">Recent</div>
+            <div class="projects">
+                <div class="project-item">
+                    <div class="project-header">
+                        <span>IRIS - Eye Tracking Interface</span>
+                        <span>→</span>
+                    </div>
+                    <div class="project-content">
+                        <p>
+                            Tried to build a real-time desktop control system using eye movements with 
+                            Sudhanshu and Aditya. The idea was to track eye position and translate it to 
+                            cursor movement and blinks into clicks. Hit a wall with consistency issues and the need for specialized 
+                            cameras we couldn't get our hands on. Still learned a ton about computer vision 
+                            and real-time processing though!
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">matplotlib</span>
+                            <span class="tech-tag">OpenCV</span>
+                            <span class="tech-tag">dlib</span>
+                            <span class="tech-tag">PyAutoGUI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-header">
+                        <span>Text Tool</span>
+                        <span>→</span>
+                    </div>
+                    <div class="project-content">
+                        <p>
+                            Built a tool (somewhat) that reads through social media posts and figures out if people are 
+                            happy, angry, or somewhere in between. It's pretty good at catching sarcasm too 
+                            (most of the time). Currently being used by a local marketing team to understand 
+                            what their customers really think.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">BERT</span>
+                            <span class="tech-tag">FastAPI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="section" style="text-align: center; color: var(--text-dim); font-size: 12px;">
+            Last edited: January 1, 2024
+        </footer>
+    </div>
+
+    <style>
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -146,126 +271,6 @@
             border-radius: 4px;
             font-size: 12px;
         }
-
-        @media (max-width: 640px) {
-            .container {
-                padding: 20px 16px;
-            }
-            
-            .contact-links {
-                flex-direction: column;
-            }
-            
-            .contact-link {
-                text-align: center;
-            }
-        }
     </style>
-</head>
-<body>
-    <div class="container">
-        <header class="section" id="header">
-            <h1>Hi, I am Shekhar.</h1>
-            <div class="subtitle">A student and tech enthusiast based in Pune, India.</div>
-            <div class="status">Available for Projects</div>
-            <div class="contact-links">
-                <a href="mailto:shekhar9330@gmail.com" class="contact-link">
-                    <i class="fas fa-envelope"></i> Email
-                </a>
-                <a href="https://github.com/flyhighr" class="contact-link" target="_blank">
-                    <i class="fab fa-github"></i> GitHub
-                </a>
-                <a href="#" class="contact-link">
-                    <i class="fab fa-discord"></i> rflyhigh
-                </a>
-            </div>
-        </header>
-
-        <section class="section" id="current">
-            <div class="section-title">Currently</div>
-            <div class="current-role">
-                <div class="role-title">Student Developer - Freelance</div>
-                <div class="date">2024 - Present</div>
-                <div class="location">Nextvision</div>
-                <div class="location">Pune, India</div>
-            </div>
-            <div class="about-text">
-                Passionate about Python development and machine learning. Currently focused on developing ML models 
-                and expanding my knowledge in data science while collaborating with Nextvision on freelance projects. 
-                I love experimenting with new technologies and building practical solutions.
-            </div>
-        </section>
-
-        <section class="section" id="education">
-            <div class="section-title">Education</div>
-            <div class="current-role">
-                <div class="role-title">Diploma in AI and ML</div>
-                <div class="location">Ajeenkya DY Patil School of Engineering, Lohegaon</div>
-                <div class="date">Expected completion in 1.5 years</div>
-            </div>
-        </section>
-
-        <section class="section" id="skills">
-            <div class="section-title">Skills & Technologies</div>
-            <div class="skills-grid">
-                <div class="skill-card">Python</div>
-                <div class="skill-card">Machine Learning</div>
-                <div class="skill-card">Data Science</div>
-                <div class="skill-card">Neural Networks</div>
-                <div class="skill-card">TensorFlow</div>
-                <div class="skill-card">scikit-learn</div>
-            </div>
-        </section>
-
-        <section class="section" id="projects">
-            <div class="section-title">Recent Work</div>
-            <div class="projects">
-                <div class="project-item">
-                    <div class="project-header">
-                        <span>ML Model Development</span>
-                        <span>→</span>
-                    </div>
-                    <div class="project-content">
-                        <p>A comprehensive machine learning model for predictive analytics.</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">TensorFlow</span>
-                            <span class="tech-tag">scikit-learn</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-item">
-                    <div class="project-header">
-                        <span>Data Analysis Projects</span>
-                        <span>→</span>
-                    </div>
-                    <div class="project-content">
-                        <p>Series of data analysis projects focusing on real-world problems.</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Pandas</span>
-                            <span class="tech-tag">Matplotlib</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-item">
-                    <div class="project-header">
-                        <span>Python Automation Tools</span>
-                        <span>→</span>
-                    </div>
-                    <div class="project-content">
-                        <p>Collection of automation scripts for daily tasks.</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Selenium</span>
-                            <span class="tech-tag">BeautifulSoup</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
 </body>
 </html>
